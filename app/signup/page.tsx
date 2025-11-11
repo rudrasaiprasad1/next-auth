@@ -1,7 +1,10 @@
-import React from "react";
-
 const SignUpPage = () => {
-  return <div>SignUpPage</div>;
+  return (
+    <div className="flex justify-center align-sub">
+      SignUpPage
+      <div></div>
+    </div>
+  );
 };
 
 export default SignUpPage;
