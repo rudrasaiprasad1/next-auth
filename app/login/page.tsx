@@ -1,8 +1,9 @@
 "use client";
+import Link from "next/link";
 import { useState } from "react";
 
 const LoginPage = () => {
-  const [data, setData] = useState<{
+  const [data, setUser] = useState<{
     email: string;
     password: string;
   }>({
@@ -27,26 +28,28 @@ const LoginPage = () => {
         onSubmit={handleSubmit}
         className="flex flex-col items-center align-middle justify-center inset-0 gap-3"
       >
-        <h1>Login Page</h1>
-        <input
-          type="email"
-          name="email"
-          placeholder="Enter Your Email"
-          value={data.email}
-          onChange={(e) => setData({ ...data, email: e.target.value })}
-          className="border rounded-lg p-1 w-full"
-          required
-        />
-        <label htmlFor="password">
+        <h1 className="text-3xl">Login</h1>
+        <label htmlFor="email" className="w-full">
+          Email
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter Your Email"
+            value={data.email}
+            onChange={(e) => setUser({ ...data, email: e.target.value })}
+            className="border rounded-lg p-1 w-full"
+            required
+          />
+        </label>
+        <label htmlFor="password" className="w-full">
+          Password
           <input
             name="password"
             type={!showPassword ? "password" : "text"}
             placeholder="********"
             value={data.password}
-            onChange={(e) => setData({ ...data, password: e.target.value })}
+            onChange={(e) => setUser({ ...data, password: e.target.value })}
             className="border rounded-lg p-1 w-full"
-            maxLength={16}
-            min={8}
             required
           />
           <button
@@ -60,8 +63,11 @@ const LoginPage = () => {
           </button>
         </label>
         <button type="submit" className="border rounded-lg p-1 w-full ">
-          SignUP
+          Login
         </button>
+        <Link className="text-blue-600" href={"/signup"}>
+          go to signup page
+        </Link>
       </form>
     </div>
   );
