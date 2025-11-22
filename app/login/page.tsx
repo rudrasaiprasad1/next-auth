@@ -6,7 +6,7 @@ import {
   // useEffect
   useState,
 } from "react";
-
+// axios.defaults.withCredentials = true; // ⭐ important
 const LoginPage = () => {
   const [data, setUser] = useState<{
     email: string;
@@ -19,11 +19,14 @@ const LoginPage = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const [loading, setLoading] = useState<boolean>(false);
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault(); // 🚀 stops page reload
     setLoading(true);
     try {
       const response = await axios.post("/api/users/login", data);
+
       console.log(response.data);
+
       router.replace("/profile");
     } catch (error) {
       if (error instanceof Error) {

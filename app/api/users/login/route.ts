@@ -16,10 +16,14 @@ export const POST = async (request: NextRequest) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-      return NextResponse.json({
-        error: `User Doesn't Exists '${email}'`,
-        status: 400,
-      });
+      // return NextResponse.json({
+      //   error: `User Doesn't Exists '${email}'`,
+      //   status: 400,
+      // });
+      return NextResponse.json(
+        { error: "User Doesn't Exist" },
+        { status: 400 }
+      );
     }
 
     const validatePassword = await bcrypt.compare(password, user.password);
