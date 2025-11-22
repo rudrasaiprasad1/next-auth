@@ -1,9 +1,9 @@
-import { dbConnect } from "@/db/config";
+import { dbConnect } from "@/src/db/config";
 
 import { NextResponse, NextRequest } from "next/server";
 
 import bcrypt from "bcryptjs";
-import User from "@/models/userModel";
+import User from "@/src/models/userModel";
 
 dbConnect();
 

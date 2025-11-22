@@ -1,49 +1,67 @@
 "use client";
-import axios from "axios";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import { useRouter } from "next/navigation";
-import {
-  // useEffect
-  useState,
-} from "react";
-// axios.defaults.withCredentials = true; // ⭐ important
-const LoginPage = () => {
+import toast from "react-hot-toast";
+
+const SignUpPage = () => {
   const [data, setUser] = useState<{
+    username: string;
     email: string;
     password: string;
   }>({
+    username: "",
     email: "",
     password: "",
   });
   const router = useRouter();
+
   const [showPassword, setShowPassword] = useState<boolean>(false);
-
-  const [loading, setLoading] = useState<boolean>(false);
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault(); // 🚀 stops page reload
-    setLoading(true);
+  const [disablled, setDisablled] = useState<boolean>(false);
+  const handleSubmit = async () => {
     try {
-      const response = await axios.post("/api/users/login", data);
-
+      const response = await axios.post("/api/users/signup", data);
       console.log(response.data);
-
-      router.replace("/profile");
+      router.push("/login");
+      toast.success("Registration Successfully!!");
     } catch (error) {
       if (error instanceof Error) {
         console.log(`${error.name} : ${error.message}`);
       }
-    } finally {
-      setLoading(false);
     }
   };
 
+  useEffect(() => {
+    if (
+      data.email.length > 0 &&
+      data.password.length > 0 &&
+      data.username.length > 0
+    ) {
+      setDisablled(false);
+    } else {
+      setDisablled(true);
+    }
+  }, [data]);
   return (
     <div className="flex h-screen justify-center align-middle  items-center inset-0 ">
       <form
         onSubmit={handleSubmit}
         className="flex flex-col items-center align-middle justify-center inset-0 gap-3"
       >
-        <h1 className="text-3xl">Login</h1>
+        <h1 className="text-3xl">SignUp</h1>
+        <label htmlFor="email" className="w-full">
+          User Name
+          <input
+            type="text"
+            name="username"
+            placeholder="Enter User Name"
+            value={data.username}
+            onChange={(e) => setUser({ ...data, username: e.target.value })}
+            className="border rounded-lg p-1 w-full"
+            required
+          />
+        </label>
         <label htmlFor="email" className="w-full">
           Email
           <input
@@ -61,11 +79,12 @@ const LoginPage = () => {
           <input
             name="password"
             type={!showPassword ? "password" : "text"}
-            placeholder="********"
+            placeholder="*****************"
             value={data.password}
             onChange={(e) => setUser({ ...data, password: e.target.value })}
-            className="border rounded-lg p-1 w-full"
-            autoComplete={"true"}
+            className="border rounded-lg p-1 w-full placeholder:items-center"
+            maxLength={16}
+            minLength={8}
             required
           />
           <button
@@ -81,16 +100,16 @@ const LoginPage = () => {
         <button
           type="submit"
           className="border rounded-lg p-1 w-full "
-          disabled={loading}
+          disabled={disablled}
         >
-          {loading ? "Loading..." : "Login"}
+          {disablled ? "No SignUp" : "SignUp"}
         </button>
-        <Link className="text-blue-600" href={"/signup"}>
-          go to signup page
+        <Link className="text-blue-600" href={"/login"}>
+          already user login
         </Link>
       </form>
     </div>
   );
 };
 
-export default LoginPage;
+export default SignUpPage;
