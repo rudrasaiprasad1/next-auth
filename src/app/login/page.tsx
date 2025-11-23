@@ -21,7 +21,7 @@ const LoginPage = () => {
 
   const [loading, setLoading] = useState<boolean>(false);
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault(); // 🚀 stops page reload
+    e.preventDefault();
     setLoading(true);
     try {
       const response = await axios.post("/api/users/login", data);
