@@ -4,6 +4,8 @@ import { NextResponse, NextRequest } from "next/server";
 
 import bcrypt from "bcryptjs";
 import User from "@/src/models/userModel";
+import { sendEmail } from "@/src/helpers/mailer";
+import { EmailType } from "@/src/helpers/types";
 
 dbConnect();
 
@@ -12,7 +14,7 @@ export const POST = async (request: NextRequest) => {
     const reqBody = await request.json();
     const { username, email, password } = reqBody;
 
-    console.log(reqBody); //hitest chaudary downloaded video nextjs fullstack timestamp 23:03
+    console.log(reqBody);
 
     const user = await User.findOne({ email });
 
@@ -36,6 +38,12 @@ export const POST = async (request: NextRequest) => {
     const savedUser = await newUser.save();
 
     console.log(savedUser);
+
+    await sendEmail({
+      email: email,
+      emailType: EmailType.VERIFY,
+      userId: savedUser._id,
+    });
 
     return NextResponse.json({
       message: `User Register Successfully ✅`,

@@ -1,6 +1,9 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import {
+  // useEffect,
+  useState,
+} from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
@@ -18,7 +21,7 @@ const SignUpPage = () => {
   const router = useRouter();
 
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [disablled, setDisablled] = useState<boolean>(false);
+  // const [disablled, setDisablled] = useState<boolean>(false);
   const handleSubmit = async () => {
     try {
       const response = await axios.post("/api/users/signup", data);
@@ -32,17 +35,18 @@ const SignUpPage = () => {
     }
   };
 
-  useEffect(() => {
-    if (
-      data.email.length > 0 &&
-      data.password.length > 0 &&
-      data.username.length > 0
-    ) {
-      setDisablled(false);
-    } else {
-      setDisablled(true);
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (
+  //     data.email.length > 0 &&
+  //     data.password.length > 0 &&
+  //     data.username.length > 0
+  //   ) {
+  //     setDisablled(false);
+  //   } else {
+  //     setDisablled(true);
+  //   }
+  // }, [data]);
+  const disablled = !data.email || !data.password || !data.username;
   return (
     <div className="flex h-screen justify-center align-middle  items-center inset-0 ">
       <form
