@@ -12,7 +12,9 @@ export const POST = async (request: NextRequest) => {
       verifyToken: token,
       verifyTokenExpiry: { $gt: Date.now() },
     });
+
     console.log(user);
+
     if (!user) {
       return NextResponse.json(
         {
@@ -21,14 +23,20 @@ export const POST = async (request: NextRequest) => {
         { status: 400 }
       );
     }
+
     user.isVerified = true;
     user.verifyToken = undefined;
     user.verifyTokenExpiry = undefined;
+
     user.save();
-    NextResponse.json({
-      message: "Email Verified Successfully ",
-      success: true,
-    });
+
+    return NextResponse.json(
+      {
+        message: "Email Verified Successfully ",
+        success: true,
+      },
+      { status: 200 }
+    );
   } catch (error: unknown) {
     if (error instanceof Error) {
       return NextResponse.json(
