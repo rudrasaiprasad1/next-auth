@@ -76,15 +76,26 @@ DOMAIN="http://localhost:3000"
 ## 📁 Folder Structure (Optional Example)
 
 ```
-/project
-  ├── components/
-  ├── pages/
+/src
   ├── app/
-  ├── utils/
+  ├──├── login/
+  ├──├── profile/
+  ├──├── signup/
+  ├──├── verifyemail/
+  ├──├── layout.tsx/
+  ├──├── .env
+  ├──├── .env
+  ├──├── README.md
+  ├──└── README.md
+  ├── db/
+  ├── helpers/
   ├── models/
-  ├── public/
+  ├── proxy/ (new version for middleware in Nextjs 16+ i am using 16.0.1 )
   ├── .env
-  └── README.md
+  ├──
+  ├──
+  ├──
+  └──
 ```
 
 ---
