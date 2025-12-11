@@ -90,6 +90,9 @@ const LoginPage = () => {
         <Link className="text-blue-600" href={"/signup"}>
           go to signup page
         </Link>
+        <Link className="text-blue-600" href={"/forgotpassword"}>
+          forgot password
+        </Link>
       </form>
     </div>
   );

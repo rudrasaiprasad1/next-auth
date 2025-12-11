@@ -1,55 +1,47 @@
 import { dbConnect } from "@/src/db/config";
+import { NextResponse, NextRequest } from "next/server";
 import User from "@/src/models/userModel";
-import { NextRequest, NextResponse } from "next/server";
+import { sendEmail } from "@/src/helpers/mailer";
+import { EmailType } from "@/src/helpers/types";
+
 dbConnect();
+
 export const POST = async (request: NextRequest) => {
   try {
-    const RequesBody = await request.json();
-    const { token } = RequesBody;
-    console.log(token);
+    const reqBody = await request.json();
+    const { email } = reqBody;
 
-    const user = await User.findOne({
-      verifyToken: token,
-      verifyTokenExpiry: { $gt: Date.now() },
-    });
+    console.log(reqBody);
 
-    console.log(user);
+    const user = await User.findOne({ email });
 
     if (!user) {
-      return NextResponse.json(
-        {
-          error: "Invalid Token",
-        },
-        { status: 400 }
-      );
+      return NextResponse.json({
+        error: `User Not Exists '${email}'`,
+        status: 400,
+      });
     }
 
-    if (user.isVerified === false) {
-      return NextResponse.json(
-        {
-          error: "Please Verify the Email then set the password",
-        },
-        { status: 400 }
-      );
+    if (user) {
+      await sendEmail({
+        email: email,
+        emailType: EmailType.RESET,
+        userId: user._id,
+      });
     }
-    // user.isVerified = true;
-    // user.verifyToken = undefined;
-    // user.verifyTokenExpiry = undefined;
 
-    // user.save();
-
-    return NextResponse.json(
-      {
-        message: "Password Changed Successfully ",
-        success: true,
-      },
-      { status: 200 }
-    );
-  } catch (error: unknown) {
+    return NextResponse.json({
+      message: `Password Reset Link Sent to your verified Email.`,
+      success: true,
+      user,
+    });
+  } catch (error) {
     if (error instanceof Error) {
+      console.log(`${error.name}: ${error.message}`);
       return NextResponse.json(
         {
-          error: error.message,
+          error: error.message || "Internal Server Error",
+          success: false,
         },
         { status: 500 }
       );
