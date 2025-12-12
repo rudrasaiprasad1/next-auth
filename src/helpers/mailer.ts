@@ -50,22 +50,30 @@ export const sendEmail = async ({
       <td style="padding:30px;">
 
         <h2 style="margin:0 0 15px; font-size:22px; color:#111827;">
-          ${EmailType.VERIFY ? "Verify Your Email" : "Reset Your Password"}
+          ${
+            emailType === EmailType.VERIFY
+              ? "Verify Your Email"
+              : "Reset Your Password"
+          }
         </h2>
 
         <p style="font-size:15px; color:#374151; line-height:1.6;">
           Click the button below to 
           ${
-            EmailType.VERIFY
+            emailType === EmailType.VERIFY
               ? "verify your email address"
               : "reset your password"
           }:
         </p>
 
         <div style="margin:25px 0;  display: flex; justify-content: center;">
-          <a href="${process.env.DOMAIN}/verifyemail?token=${hashedToken}"
+          <a href="${process.env.DOMAIN}/${
+        emailType === EmailType.VERIFY ? "verifyemail" : "forgotpassword"
+      }?token=${hashedToken}"
             style="background:#4F46E5; padding:14px 28px; color:white; text-decoration:none; border-radius:6px; display:inline-block; font-weight:bold; font-size:15px;">
-            ${EmailType.VERIFY ? "Verify Email" : "Reset Password"}
+            ${
+              emailType === EmailType.VERIFY ? "Verify Email" : "Reset Password"
+            }
           </a>
         </div>
 
