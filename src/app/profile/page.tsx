@@ -58,6 +58,13 @@ const ProfilePage = () => {
           )}
         </Link>
 
+        {data?._id ? (
+          <>
+            <div>User Name : {data?.userName}</div>
+            <div>Email : {data?.email}</div>
+          </>
+        ) : null}
+
         <button
           className="border rounded-lg p-1 w-full bg-red-600 "
           onClick={logout}

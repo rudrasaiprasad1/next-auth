@@ -1,7 +1,5 @@
 interface PostPageProps {
-  params: {
-    id: string;
-  };
+  params: Promise<{ id: string }>;
 }
 export default async function ProfileIdPage({ params }: PostPageProps) {
   const { id } = await params;

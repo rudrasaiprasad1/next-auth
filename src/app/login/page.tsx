@@ -25,7 +25,10 @@ const LoginPage = () => {
     setLoading(true);
     try {
       const response = await axios.post("/api/users/login", data);
-
+      if (response.data.error) {
+        toast.error(response.data.error);
+        return;
+      }
       console.log(response.data);
 
       router.replace("/profile");

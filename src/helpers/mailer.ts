@@ -68,7 +68,7 @@ export const sendEmail = async ({
 
         <div style="margin:25px 0;  display: flex; justify-content: center;">
           <a href="${process.env.DOMAIN}/${
-        emailType === EmailType.VERIFY ? "verifyemail" : "forgotpassword"
+        emailType === EmailType.VERIFY ? "verifyemail" : "resetpassword"
       }?token=${hashedToken}"
             style="background:#4F46E5; padding:14px 28px; color:white; text-decoration:none; border-radius:6px; display:inline-block; font-weight:bold; font-size:15px;">
             ${

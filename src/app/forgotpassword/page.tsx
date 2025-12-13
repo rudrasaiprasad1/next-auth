@@ -18,8 +18,10 @@ const ForgotPasswordPage = () => {
     try {
       const response = await axios.post("/api/users/forgotpassword", user);
       console.log(response.data);
-      toast.success("Password Reset Link Sent Successfully!!");
-      router.push("/login");
+      if (response.data.success) {
+        toast.success("Password Reset Link Sent Successfully!!");
+        router.push("/login");
+      }
     } catch (error) {
       if (error instanceof Error) {
         console.log(`${error.name} : ${error.message}`);

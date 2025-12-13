@@ -1,6 +1,7 @@
 import { dbConnect } from "@/src/db/config";
 import User from "@/src/models/userModel";
 import { NextRequest, NextResponse } from "next/server";
+import bcrypt from "bcryptjs";
 dbConnect();
 export const POST = async (request: NextRequest) => {
   try {
@@ -32,8 +33,11 @@ export const POST = async (request: NextRequest) => {
         { status: 400 }
       );
     }
+    //hash passowrd
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
 
-    user.password = password;
+    user.password = hashedPassword;
     user.forgotPasswordToken = undefined;
     user.forgotPasswordTokenExpiry = undefined;
     user.save();

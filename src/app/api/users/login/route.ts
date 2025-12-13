@@ -30,7 +30,7 @@ export const POST = async (request: NextRequest) => {
 
     if (!validatePassword) {
       return NextResponse.json({
-        error: `Invalid Password '${password}'`,
+        error: `Invalid Password `,
         status: 400,
       });
     }
