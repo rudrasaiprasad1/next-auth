@@ -2,23 +2,13 @@
 
 import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, {
-  // useEffect,
-  useState,
-} from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
 
 const ResetPasswordClient = () => {
   const router = useRouter();
-  // const searchParams = useSearchParams();
-  // const token = searchParams.get("token");
-  const [token] = useState(() => {
-    if (typeof window !== "undefined") {
-      const params = new URLSearchParams(window.location.search);
-      return params.get("token") || "";
-    }
-    return "";
-  });
+  const searchParams = useSearchParams();
+  const token = searchParams.get("token");
 
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
@@ -32,13 +22,10 @@ const ResetPasswordClient = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  // ✅ SIDE EFFECTS MUST BE IN useEffect
   if (!token) {
     toast.error("Invalid or missing reset token");
     setStatus("error");
   }
-  //   useEffect(() => {
-  //   }, [token]);
 
   const handleResetPassword = async (e: React.FormEvent) => {
     e.preventDefault();
