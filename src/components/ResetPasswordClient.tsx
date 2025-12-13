@@ -10,8 +10,15 @@ import toast from "react-hot-toast";
 
 const ResetPasswordClient = () => {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const token = searchParams.get("token");
+  // const searchParams = useSearchParams();
+  // const token = searchParams.get("token");
+  const [token] = useState(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      return params.get("token") || "";
+    }
+    return "";
+  });
 
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"

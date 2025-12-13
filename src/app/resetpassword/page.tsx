@@ -15,6 +15,7 @@ const ResetPasswordPage = () => {
   );
 };
 
+export default ResetPasswordPage;
 // const ResetPasswordPage = () => {
 //   const router = useRouter();
 //   const [status, setStatus] = useState<
@@ -146,5 +147,3 @@ const ResetPasswordPage = () => {
 //     </div>
 //   );
 // };
-
-export default ResetPasswordPage;
