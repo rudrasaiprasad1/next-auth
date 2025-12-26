@@ -14,11 +14,11 @@ export const Header = () => {
 
           {/* Navigation Menu */}
           <nav className="hidden md:flex space-x-10 text-lg">
-            <Link href="#" className="hover:text-gray-300 transition-all">
+            <Link href="/" className="hover:text-gray-300 transition-all">
               Home
             </Link>
             <Link
-              href="#services"
+              href="services"
               className="hover:text-gray-300 transition-all"
             >
               Services

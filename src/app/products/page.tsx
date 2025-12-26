@@ -35,7 +35,7 @@ const Products = [
 
 const ProductsPage = () => {
   return (
-    <div className="flex h-full w-full justify-center align-middle  bg-gray-200">
+    <div className="flex min-h-screen h-full w-full justify-center align-middle  bg-gray-200">
       <div className=" grid grid-cols-3 gap-2">
         {Products.map((product, index) => (
           <div
@@ -56,7 +56,7 @@ const ProductsPage = () => {
             <div>Price : {product.Price} </div>
             <div>Qty : {product.Qty} </div>
             <div className="flex w-full flex-col">
-              <button className="bg-yellow-400 text-black rounded-3xl p-4 text-center items-center">
+              <button className="bg-yellow-400 text-black rounded-3xl p-4 text-center items-center active:bg-yellow-500 active:text-gray-900 cursor-pointer">
                 Add to Cart
               </button>
             </div>
