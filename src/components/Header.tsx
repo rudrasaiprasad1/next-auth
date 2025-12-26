@@ -7,8 +7,8 @@ export const Header = () => {
         <div className="flex items-center justify-between">
           {/* Logo Section  */}
           <div className="flex">
-            <Link href="#" className="text-2xl font-bold">
-              Tailwind{" "}
+            <Link href="/" className="text-2xl font-bold">
+              Next App
             </Link>
           </div>
 
@@ -23,13 +23,10 @@ export const Header = () => {
             >
               Services
             </Link>
-            <Link href="#about" className="hover:text-gray-300 transition-all">
+            <Link href="about" className="hover:text-gray-300 transition-all">
               About Us
             </Link>
-            <Link
-              href="#contact"
-              className="hover:text-gray-300 transition-all"
-            >
+            <Link href="contact" className="hover:text-gray-300 transition-all">
               Contact
             </Link>
           </nav>
@@ -69,25 +66,25 @@ export const Header = () => {
         {/* Mobile Navigation Menu  */}
         <div id="mobile-menu" className="md:hidden mt-5 hidden space-y-4">
           <Link
-            href="#"
+            href="home"
             className="block text-lg hover:text-gray-300 transition-all"
           >
             Home
           </Link>
           <Link
-            href="#services"
+            href="services"
             className="block text-lg hover:text-gray-300 transition-all"
           >
             Services
           </Link>
           <Link
-            href="#about"
+            href="about"
             className="block text-lg hover:text-gray-300 transition-all"
           >
             About Us
           </Link>
           <Link
-            href="#contact"
+            href="contact"
             className="block text-lg hover:text-gray-300 transition-all"
           >
             Contact
