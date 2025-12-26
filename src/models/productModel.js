@@ -1,41 +1,51 @@
-import { randomUUID } from "crypto";
 import mongoose from "mongoose";
+import { randomUUID } from "crypto";
 
-const productSchema = new mongoose.Schema({
-  productName: {
-    type: String,
-    required: [true, "please provide a Product Name"],
-    unique: true,
+const productSchema = new mongoose.Schema(
+  {
+    productName: {
+      type: String,
+      required: [true, "Please provide a product name"],
+      unique: true,
+    },
+
+    productId: {
+      type: String,
+      unique: true,
+      default: () => randomUUID(), // ✅ UUID
+    },
+
+    price: {
+      type: Number,
+      required: [true, "Please provide a price"],
+    },
+
+    quantity: {
+      type: Number,
+      required: true,
+      default: 1,
+    },
+
+    description: {
+      type: String,
+      default: null,
+    },
+
+    productImage: {
+      type: String,
+      default: null,
+    },
+
+    userId: {
+      type: mongoose.Schema.Types.ObjectId, // 👈 better
+      ref: "User",
+      required: true,
+    },
   },
-  productId: {
-    type: randomUUID,
-    autoincre: [true, "please provide a Email"],
-    unique: true,
-  },
-  price: {
-    type: Number,
-    required: [true, "please provide a Price"],
-  },
-  quantity: {
-    type: Number,
-    required: [true, "please provide a Quantity"],
-    default: 1,
-  },
-  description: {
-    type: String,
-    nullable: true,
-  },
-  productImage: {
-    type: String,
-    nullable: true,
-  },
-  userId: {
-    type: String,
-    nullable: true,
-  },
-});
+  { timestamps: true }
+);
 
 const Product =
-  mongoose.models.users || mongoose.model("products", productSchema);
+  mongoose.models.product || mongoose.model("Product", productSchema);
 
 export default Product;
