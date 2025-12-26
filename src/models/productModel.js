@@ -1,3 +1,4 @@
+import { randomUUID } from "crypto";
 import mongoose from "mongoose";
 
 const productSchema = new mongoose.Schema({
@@ -7,8 +8,8 @@ const productSchema = new mongoose.Schema({
     unique: true,
   },
   productId: {
-    type: String,
-    required: [true, "please provide a Email"],
+    type: randomUUID,
+    autoincre: [true, "please provide a Email"],
     unique: true,
   },
   price: {
@@ -21,6 +22,14 @@ const productSchema = new mongoose.Schema({
     default: 1,
   },
   description: {
+    type: String,
+    nullable: true,
+  },
+  productImage: {
+    type: String,
+    nullable: true,
+  },
+  userId: {
     type: String,
     nullable: true,
   },
