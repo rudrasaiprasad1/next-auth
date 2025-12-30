@@ -12,7 +12,7 @@ const productSchema = new mongoose.Schema(
     productId: {
       type: String,
       unique: true,
-      default: () => randomUUID(), // ✅ UUID
+      default: () => randomUUID(),
     },
 
     price: {
