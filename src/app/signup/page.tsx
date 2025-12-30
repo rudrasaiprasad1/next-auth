@@ -35,17 +35,6 @@ const SignUpPage = () => {
     }
   };
 
-  // useEffect(() => {
-  //   if (
-  //     data.email.length > 0 &&
-  //     data.password.length > 0 &&
-  //     data.username.length > 0
-  //   ) {
-  //     setDisablled(false);
-  //   } else {
-  //     setDisablled(true);
-  //   }
-  // }, [data]);
   const disablled = !data.email || !data.password || !data.username;
   return (
     <div className="flex h-screen justify-center align-middle  items-center inset-0 ">
