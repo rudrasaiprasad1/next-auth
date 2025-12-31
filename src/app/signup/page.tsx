@@ -40,7 +40,7 @@ const SignUpPage = () => {
     <div className="flex h-screen justify-center align-middle  items-center inset-0 ">
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col items-center align-middle justify-center inset-0 gap-3"
+        className="flex flex-col items-center align-middle justify-center inset-0 gap-3 border p-6 rounded-lg bg-gray-800 text-white z-10"
       >
         <h1 className="text-3xl">SignUp</h1>
         <label htmlFor="email" className="w-full">

@@ -4,6 +4,7 @@ import "./globals.css";
 import { Toaster } from "react-hot-toast";
 // import SideBar from "../components/SideBar";
 import { Header } from "../components/Header";
+import BackGroundEffects from "../components/BackGroundEffects";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,7 +34,7 @@ export default function RootLayout({
         <Header />
         {/* <SideBar /> */}
         <Toaster />
-        {children}
+        <BackGroundEffects>{children}</BackGroundEffects>
       </body>
     </html>
   );

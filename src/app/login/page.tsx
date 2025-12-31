@@ -43,61 +43,59 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex h-screen justify-center align-middle  items-center inset-0 ">
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col items-center align-middle justify-center inset-0 gap-3"
-      >
-        <h1 className="text-3xl">Login</h1>
-        <label htmlFor="email" className="w-full">
-          Email
-          <input
-            type="email"
-            name="email"
-            placeholder="Enter Your Email"
-            value={data.email}
-            onChange={(e) => setUser({ ...data, email: e.target.value })}
-            className="border rounded-lg p-1 w-full"
-            required
-          />
-        </label>
-        <label htmlFor="password" className="w-full">
-          Password
-          <input
-            name="password"
-            type={!showPassword ? "password" : "text"}
-            placeholder="********"
-            value={data.password}
-            onChange={(e) => setUser({ ...data, password: e.target.value })}
-            className="border rounded-lg p-1 w-full"
-            autoComplete={"true"}
-            required
-          />
-          <button
-            className="text-blue-600"
-            onClick={(e) => {
-              e.preventDefault();
-              setShowPassword(!showPassword);
-            }}
-          >
-            {!showPassword ? `show` : "hide"}
-          </button>
-        </label>
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col items-center align-middle justify-center inset-0 gap-3 border p-6 rounded-lg bg-gray-800 text-white z-10"
+    >
+      <h1 className="text-3xl">Login</h1>
+      <label htmlFor="email" className="w-full">
+        Email
+        <input
+          type="email"
+          name="email"
+          placeholder="Enter Your Email"
+          value={data.email}
+          onChange={(e) => setUser({ ...data, email: e.target.value })}
+          className="border rounded-lg p-1 w-full"
+          required
+        />
+      </label>
+      <label htmlFor="password" className="w-full">
+        Password
+        <input
+          name="password"
+          type={!showPassword ? "password" : "text"}
+          placeholder="********"
+          value={data.password}
+          onChange={(e) => setUser({ ...data, password: e.target.value })}
+          className="border rounded-lg p-1 w-full"
+          autoComplete={"true"}
+          required
+        />
         <button
-          type="submit"
-          className="border rounded-lg p-1 w-full "
-          disabled={loading}
+          className="text-blue-600"
+          onClick={(e) => {
+            e.preventDefault();
+            setShowPassword(!showPassword);
+          }}
         >
-          {loading ? "Loading..." : "Login"}
+          {!showPassword ? `show` : "hide"}
         </button>
-        <Link className="text-blue-600" href={"/signup"}>
-          go to signup page
-        </Link>
-        <Link className="text-blue-600" href={"/forgotpassword"}>
-          forgot password
-        </Link>
-      </form>
-    </div>
+      </label>
+      <button
+        type="submit"
+        className="border rounded-lg p-1 w-full "
+        disabled={loading}
+      >
+        {loading ? "Loading..." : "Login"}
+      </button>
+      <Link className="text-blue-600" href={"/signup"}>
+        go to signup page
+      </Link>
+      <Link className="text-blue-600" href={"/forgotpassword"}>
+        forgot password
+      </Link>
+    </form>
   );
 };
 
