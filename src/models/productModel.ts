@@ -1,12 +1,29 @@
-import mongoose from "mongoose";
+import mongoose, { Schema, Document, Model } from "mongoose";
 import { randomUUID } from "crypto";
 
-const productSchema = new mongoose.Schema(
+/* ============================
+   1️⃣ Product Interface
+============================ */
+
+export interface IProduct extends Document {
+  productName: string;
+  productId?: string;
+  price: number;
+  quantity: number;
+  description: string;
+  productImage: string;
+  userId: mongoose.Types.ObjectId;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+const ProductSchema: Schema<IProduct> = new Schema(
   {
     productName: {
       type: String,
       required: [true, "Please provide a product name"],
       unique: true,
+      trim: true,
     },
 
     productId: {
@@ -39,13 +56,14 @@ const productSchema = new mongoose.Schema(
     userId: {
       type: mongoose.Schema.Types.ObjectId, // 👈 better
       ref: "User",
-      required: true,
     },
   },
-  { timestamps: true }
+  {
+    timestamps: true, // 👈 adds createdAt & updatedAt
+  }
 );
 
-const Product =
-  mongoose.models.product || mongoose.model("Product", productSchema);
+const Product: Model<IProduct> =
+  mongoose.models.Product || mongoose.model<IProduct>("Product", ProductSchema);
 
 export default Product;
