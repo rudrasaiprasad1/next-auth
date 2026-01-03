@@ -33,7 +33,7 @@ export default function RootLayout({
       >
         <Header />
         {/* <SideBar /> */}
-        <Toaster />
+        <Toaster position="top-right" />
         <BackGroundEffects>{children}</BackGroundEffects>
       </body>
     </html>

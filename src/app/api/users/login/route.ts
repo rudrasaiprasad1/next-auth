@@ -11,15 +11,11 @@ export const POST = async (request: NextRequest) => {
     const reqBody = await request.json();
     const { email, password } = reqBody;
 
-    console.log(reqBody); //hitest chaudary downloaded video nextjs fullstack timestamp 23:03
+    console.log(reqBody);
 
     const user = await User.findOne({ email });
 
     if (!user) {
-      // return NextResponse.json({
-      //   error: `User Doesn't Exists '${email}'`,
-      //   status: 400,
-      // });
       return NextResponse.json(
         { error: "User Doesn't Exist" },
         { status: 400 }

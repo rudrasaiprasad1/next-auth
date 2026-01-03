@@ -25,6 +25,7 @@ const LoginPage = () => {
     setLoading(true);
     try {
       const response = await axios.post("/api/users/login", data);
+
       if (response.data.error) {
         toast.error(response.data.error);
         return;
@@ -36,6 +37,7 @@ const LoginPage = () => {
     } catch (error) {
       if (error instanceof Error) {
         console.log(`${error.name} : ${error.message}`);
+        toast.error(error.name);
       }
     } finally {
       setLoading(false);

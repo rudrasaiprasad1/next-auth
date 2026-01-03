@@ -68,7 +68,7 @@ const ForgotPasswordPage = () => {
               name="email"
               value={user.email}
               onChange={(e) => setUser({ email: e.target.value })}
-              className="w-full border border-gray-300 bg-white px-4 py-3 text-gray-900 focus:border-transparent focus:ring-2 focus:ring-black focus:outline-none"
+              className="w-full border border-gray-300  px-4 py-3 text-white focus:border-transparent focus:ring-2 focus:ring-black focus:outline-none rounded-lg "
               placeholder="your.email@example.com"
               required
             />
@@ -76,7 +76,7 @@ const ForgotPasswordPage = () => {
 
           <button
             type="submit"
-            className="w-full bg-black px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-gray-800"
+            className="w-full border rounded-lg px-6 py-3 text-sm font-medium text-white transition-colors  cursor-pointer "
           >
             {`Send Reset Link`}
           </button>
@@ -86,7 +86,7 @@ const ForgotPasswordPage = () => {
         <div className="mt-6 text-center">
           <Link
             href="/login"
-            className="text-sm text-blue-600 duration-300 ease-linear transition-colors hover:text-black cursor-pointer"
+            className="text-sm text-blue-600 duration-300 ease-linear transition-colors hover:text-blue-500 cursor-pointer"
           >
             {`← Back to Login`}
           </Link>

@@ -21,6 +21,7 @@ export const Header = () => {
   const getDetails = async () => {
     try {
       const data = await axios.get("/api/users/me");
+      debugger;
       setData(data.data.data);
       console.table(data);
       if (data.status === 200) {
@@ -49,9 +50,6 @@ export const Header = () => {
 
           {/* Navigation Menu */}
           <nav className="hidden md:flex space-x-10 text-lg">
-            <Link href="/" className="hover:text-gray-300 transition-all">
-              Home
-            </Link>
             <Link
               href="services"
               className="hover:text-gray-300 transition-all"
