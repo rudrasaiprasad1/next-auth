@@ -16,6 +16,8 @@ export const proxy = (request: NextRequest) => {
     if (!isPublicPath && !token) {
       return NextResponse.redirect(new URL("/login", request.nextUrl));
     }
+
+    return NextResponse.next(); // 🔴 REQUIRED
   } catch (error) {
     console.error(error);
   }

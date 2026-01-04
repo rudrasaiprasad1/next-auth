@@ -68,7 +68,7 @@ const ResetPasswordClient = () => {
       {status === "idle" && (
         <form
           onSubmit={handleResetPassword}
-          className="flex flex-col gap-3 bg-black p-4 rounded"
+          className="flex flex-col gap-3 shadow-sm border p-6 rounded-lg bg-gray-800 text-white z-10"
         >
           <label>
             Password

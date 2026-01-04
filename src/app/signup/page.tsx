@@ -4,17 +4,17 @@ import {
   // useEffect,
   useState,
 } from "react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
 const SignUpPage = () => {
   const [data, setUser] = useState<{
-    username: string;
+    userName: string;
     email: string;
     password: string;
   }>({
-    username: "",
+    userName: "",
     email: "",
     password: "",
   });
@@ -26,16 +26,25 @@ const SignUpPage = () => {
     try {
       const response = await axios.post("/api/users/signup", data);
       console.log(response.data);
-      router.push("/login");
-      toast.success("Registration Successfully!!");
-    } catch (error) {
-      if (error instanceof Error) {
-        console.log(`${error.name} : ${error.message}`);
+
+      if (response.data.success) {
+        const message: string =
+          response.data.message || "Registration Successful!";
+        toast.success(message);
+        router.push("/login");
+        setUser({ userName: "", email: "", password: "" });
       }
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        toast.error(`${error?.response?.data?.error}`);
+      }
+      setUser({ userName: "", email: "", password: "" });
+    } finally {
+      setUser({ userName: "", email: "", password: "" });
     }
   };
 
-  const disablled = !data.email || !data.password || !data.username;
+  const disablled = !data.email || !data.password || !data.userName;
   return (
     <div className="flex h-screen justify-center align-middle  items-center inset-0 ">
       <form
@@ -44,13 +53,13 @@ const SignUpPage = () => {
       >
         <h1 className="text-3xl">SignUp</h1>
         <label htmlFor="email" className="w-full">
-          User Name
+          Full Name
           <input
             type="text"
-            name="username"
+            name="userName"
             placeholder="Enter User Name"
-            value={data.username}
-            onChange={(e) => setUser({ ...data, username: e.target.value })}
+            value={data.userName}
+            onChange={(e) => setUser({ ...data, userName: e.target.value })}
             className="border rounded-lg p-1 w-full"
             required
           />

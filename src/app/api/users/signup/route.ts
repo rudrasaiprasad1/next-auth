@@ -12,7 +12,7 @@ dbConnect();
 export const POST = async (request: NextRequest) => {
   try {
     const reqBody = await request.json();
-    const { username, email, password } = reqBody;
+    const { userName, email, password } = reqBody;
 
     console.log(reqBody);
 
@@ -30,7 +30,7 @@ export const POST = async (request: NextRequest) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     const newUser = new User({
-      userName: username,
+      userName: userName,
       email: email,
       password: hashedPassword,
     });
@@ -55,7 +55,7 @@ export const POST = async (request: NextRequest) => {
       console.log(`${error.name}: ${error.message}`);
       return NextResponse.json(
         {
-          error: error.message || "Internal Server Error",
+          error: error || "Internal Server Error",
           success: false,
         },
         { status: 500 }

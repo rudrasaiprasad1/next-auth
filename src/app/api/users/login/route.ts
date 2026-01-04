@@ -13,12 +13,12 @@ export const POST = async (request: NextRequest) => {
 
     console.log(reqBody);
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).select("+password");
 
     if (!user) {
       return NextResponse.json(
         { error: "User Doesn't Exist" },
-        { status: 400 }
+        { status: 404 }
       );
     }
 
@@ -27,10 +27,16 @@ export const POST = async (request: NextRequest) => {
     if (!validatePassword) {
       return NextResponse.json({
         error: `Invalid Password `,
-        status: 400,
+        status: 401,
       });
     }
 
+    if (user.isVerified === false) {
+      return NextResponse.json(
+        { error: "Email Not Verified. Please Verify Your Email!" },
+        { status: 403 }
+      );
+    }
     const tokenData = {
       id: user._id,
       username: user.userName,

@@ -26,7 +26,7 @@ export const POST = async (request: NextRequest) => {
       await sendEmail({
         email: email,
         emailType: EmailType.RESET,
-        userId: user._id,
+        userId: `${user._id}`,
       });
     }
 
