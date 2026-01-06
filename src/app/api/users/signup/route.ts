@@ -6,6 +6,7 @@ import bcrypt from "bcryptjs";
 import { sendEmail } from "@/src/helpers/mailer";
 import { EmailType } from "@/src/helpers/types";
 import User from "@/src/models/userModel";
+import Stripe from "stripe";
 
 dbConnect();
 
@@ -17,6 +18,14 @@ export const POST = async (request: NextRequest) => {
     console.log(reqBody);
 
     const user = await User.findOne({ email });
+
+    const stripe = new Stripe(process.env.STRIPE_PUBLIC_KEY!);
+
+    // Create a payment method
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
+      type: "card",
+      card: elements.getElement("card"),
+    });
 
     if (user) {
       return NextResponse.json({
