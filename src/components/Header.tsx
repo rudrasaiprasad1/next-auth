@@ -1,9 +1,11 @@
 "use client";
 import Link from "next/link";
+import { useAuthStore } from "../hook/useAuthStore";
 // import axios from "axios";
 // import { useEffect, useState } from "react";
 
 export const Header = () => {
+  const { isAuthenticated } = useAuthStore();
   // const [data, setData] = useState<any | null>(null);
 
   // const getDetails = async () => {
@@ -49,6 +51,14 @@ export const Header = () => {
             <Link href="contact" className="hover:text-gray-300 transition-all">
               Contact
             </Link>
+            {isAuthenticated ? (
+              <Link
+                href="/signin"
+                className="block text-lg p-1 rounded-lg bg-red-500 text-white hover:text-gray-300 transition-all"
+              >
+                Logout
+              </Link>
+            ) : null}
           </nav>
 
           {/* Call-to-Action Button */}
@@ -103,6 +113,7 @@ export const Header = () => {
           >
             About Us
           </Link>
+
           <Link
             href="contact"
             className="block text-lg hover:text-gray-300 transition-all"
